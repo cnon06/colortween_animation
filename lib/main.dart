@@ -32,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
 
   late AnimationController animationController;
   late Animation anime;
+  late Animation colorAnimation;
  // late AnimationController sizeAnimationController;
 
   int action = 1;
@@ -76,12 +77,15 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
 
     // https://api.flutter.dev/flutter/animation/Curves-class.html
     anime = CurvedAnimation(parent: animationController, curve: Curves.elasticIn);
+    colorAnimation = ColorTween(begin: Colors.teal, end: Colors.purpleAccent).animate(animationController);
+
     //animation();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colorAnimation.value, //Colors.pink,
       appBar: AppBar(
         title: Text("widget.title"),
       ),
