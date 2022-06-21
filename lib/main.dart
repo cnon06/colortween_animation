@@ -46,6 +46,17 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
       setState((){});
     });
 
+
+    animationController.addStatusListener((status) {
+      if(status == AnimationStatus.completed)
+        animationController.reverse();
+      else  if(status == AnimationStatus.dismissed)
+       animationController.forward();
+
+      print('$status');
+    });
+
+
   }
 
 
@@ -54,10 +65,12 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
   void initState() {
     // TODO: implement initState
     super.initState();
+
+
     animationController = AnimationController(
       value: 1,
       vsync: this,
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 1),
     );
 
 
@@ -90,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
             TextButton(onPressed: (){
               action=1;
               animationController.reset();
-              animationController.duration=Duration(seconds: 5);
+              animationController.duration=Duration(seconds: 1);
               animation();
 
             }, child: Text("Opacity Animation",
@@ -105,6 +118,18 @@ class _MyHomePageState extends State<MyHomePage>  with SingleTickerProviderState
               animation();
 
             }, child: Text("Size Animation",
+              style: TextStyle(fontSize: 20),
+            )
+            ),
+
+
+            TextButton(onPressed: (){
+
+              animationController.stop();
+             // animationController.duration=Duration(seconds: 5);
+             // animation();
+
+            }, child: Text("Stop Animation",
               style: TextStyle(fontSize: 20),
             )
             ),
